@@ -268,7 +268,11 @@ re.on_draw_ui(function()
         if is_initialised and default_gaze then
             imgui.text(string.format("Base: %.2f m   Effective: %.2f m",
                 default_gaze, default_gaze * config.distance_multiplier))
-            imgui.text("Aim briefly to apply changes instantly.")
+            imgui.spacing()
+            imgui.push_style_color(0, 0xFF00CCFF)  -- yellow-orange (ABGR)
+            imgui.text("Slider changes need a quick stance change to take effect")
+            imgui.text("(aim briefly, crouch, or run) or restart via game menu.")
+            imgui.pop_style_color(1)
         else
             imgui.text("Waiting for camera...")
         end

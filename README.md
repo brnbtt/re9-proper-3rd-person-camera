@@ -34,6 +34,8 @@ Pulls the third-person camera further back for a wider view of the action. Modif
 - Use the **Distance Multiplier** slider to adjust how far back the camera sits
 - Toggle **Enabled** to turn the mod on/off
 
+> **Note:** Slider changes need a quick stance change to take effect — aim briefly, crouch, or run. You can also restart from the game menu. Once set, the value persists and applies automatically on game load.
+
 ## Uninstall
 
 Delete `reframework/autorun/proper_3rd_person_camera.lua` from your game directory.
