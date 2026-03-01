@@ -192,7 +192,7 @@ end
 -- Re-traverses the full object path each frame so no game-object
 -- references survive between frames.
 ---------------------------------------------------------------------------
-local function write_gaze_values(multiplier)
+local function write_config_params(multiplier)
     local setting_data = get_tps_setting_data()
     if not setting_data then return end
 
@@ -218,6 +218,16 @@ local function write_gaze_values(multiplier)
             safe_set(param, "_GazeDistance", entry.original_gaze * multiplier)
         end
     end
+end
+
+---------------------------------------------------------------------------
+-- Write the runtime gaze distance for immediate effect.
+-- The config params above only take effect on state transitions.
+-- The runtime value on _PositionInterpolation is what the camera
+-- system reads every frame, so writing here gives instant feedback.
+---------------------------------------------------------------------------
+local function write_gaze_values(multiplier)
+    write_config_params(multiplier)
 end
 
 ---------------------------------------------------------------------------
@@ -258,6 +268,7 @@ re.on_draw_ui(function()
         if is_initialised and default_gaze then
             imgui.text(string.format("Base: %.2f m   Effective: %.2f m",
                 default_gaze, default_gaze * config.distance_multiplier))
+            imgui.text("Aim briefly to apply changes instantly.")
         else
             imgui.text("Waiting for camera...")
         end
